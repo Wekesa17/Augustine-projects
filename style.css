@@ -1,0 +1,78 @@
+/* style.css */
+
+/* 1. Global Page Settings (Black & White Theme) */
+body { 
+    background-color: #101010; /* Soft Black for a premium feel */
+    color: #ffffff;            /* Pure White Text */
+    font-family: 'Segoe UI', Arial, sans-serif;
+    line-height: 1.7; 
+    margin: 0;
+    padding: 0;
+}
+
+.main-container {
+    max-width: 900px; 
+    margin: 0 auto; 
+    padding: 40px 20px; 
+}
+
+/* 2. Header and Text Colors */
+header { 
+    text-align: center; 
+    background-color: #000000; /* Pure black header bar */
+    border-bottom: 2px solid #333;
+    padding: 30px 0;
+}
+
+h1 {
+    color: #fbd38d; /* Gold for main header */
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 2.8rem;
+    margin: 0;
+}
+
+h3, strong {
+    color: #fbd38d; /* Gold for headings and bold text */
+}
+
+/* 3. YOUR PANEER TIKKA IMAGE STYLING */
+.hero-image { 
+    width: 100%;
+    height: auto; 
+    border-radius: 15px; 
+    border: 1px solid #444; /* Subtle dark border to define the image against black */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); /* Deep drop shadow for a "lifted" look */
+    display: block;
+    margin: 30px auto;
+}
+
+/* 4. Table Styling with visible borders */
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 20px; 
+    background-color: #1a1a1a; /* Dark transparent table fill */
+}
+
+th, td { 
+    border: 1px solid #333; /* Dark borders so they are visible but subtle */
+    padding: 14px; 
+    text-align: left; 
+}
+
+th { 
+    background-color: #262626; /* Dark grey header for the table */
+    color: #fbd38d;
+}
+
+/* 5. Footer Links */
+footer {
+    text-align: center;
+    margin-top: 60px;
+}
+
+a {
+    color: #63b3ed;
+    text-decoration: underline;
+}
