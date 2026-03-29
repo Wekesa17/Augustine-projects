@@ -3,68 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunrise Restaurant - Authentic Flavors</title>
+    <title>Sunrise Restaurant | Home</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <h1>SUNRISE RESTAURANT</h1>
-    </header>
+    <nav class="top-nav">
+        <div class="nav-content">
+            <img src="C:\Users\HP\Downloads\logo.png.jfif" alt="Logo" class="logo">
+            <h1 class="nav-title">SUNRISE RESTAURANT</h1>
+        </div>
+    </nav>
 
-    <div class="main-container">
-        <section class="story-section">
-            <p>Welcome to <strong>Sunrise Restaurant</strong>, where every meal is crafted to brighten your day. Located in the heart of the city, we pride ourselves on using locally sourced ingredients to create vibrant, delicious dishes that celebrate the spirit of community and fresh beginnings.</p>
+    <div class="wide-container">
+        <header class="hero-header">
+            <div class="intro-text">
+                <p id="greeting" class="gold-text"></p>
+                <h2>Premium Dining in Nairobi</h2>
+                <p>Sunrise Restaurant offers a unique fusion of traditional Kenyan flavors and contemporary international cuisine. Established in 2024, we aim to provide an unforgettable dining experience with world-class hospitality.</p>
+            </div>
             
-            <img src="C:\Users\HP\Downloads\paneer tikka 😋.jfif" alt="Authentic Paneer Tikka at Sunrise Restaurant" class="hero-image">
-        </section>
-        
-        <hr>
+            <div class="slider-wrapper">
+                <div class="slider">
+                    <img id="slide-1" src="C:\Users\HP\Downloads\paneer tikka 😋.jfif" alt="Paneer Tikka">
+                    <img id="slide-2" src="C:\Users\HP\Downloads\Red Velvet Strawberry Cheesecake.jfif" alt="Breakfast">
+                    <img id="slide-3" src="C:\Users\HP\Downloads\Um hambúrguer com bacon e queijo_ _ imagem Premium gerada com IA.jfif" alt="Dinner">
+                </div>
+                <div class="slider-nav">
+                    <a href="#slide-1"></a>
+                    <a href="#slide-2"></a>
+                    <a href="#slide-3"></a>
+                </div>
+            </div>
+        </header>
 
-        <section class="menu-section">
-            <h3>Our Specialties & Services</h3>
-            <ul>
-                <li>Signature Avocado Toast</li>
-                <li>Hand-Roasted Artisan Coffee</li>
-                <li>Weekend Brunch Catering</li>
-                <li>Private Event Hosting</li>
-            </ul>
-        </section>
+        <div class="flex-row">
+            <section class="glass-box flex-item">
+                <h3>Our Services</h3>
+                <ol class="services-list">
+                    <li>Fine Dining & Ala Carte Menu</li>
+                    <li>Fast Home & Office Delivery</li>
+                    <li>Outside Catering Services</li>
+                    <li>Private VIP Lounge Bookings</li>
+                    <li>Custom Celebration Cakes</li>
+                </ol>
+            </section>
 
-        <section>
-            <h3>Menu & Pricing</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Sunrise Omelet</td>
-                        <td>Three eggs, peppers, onions, and feta.</td>
-                        <td>Sh.650</td>
-                    </tr>
-                    <tr>
-                        <td>Belgian Waffles</td>
-                        <td>Served with fresh berries and maple syrup.</td>
-                        <td>Sh.500</td>
-                    </tr>
-                    <tr>
-                        <td>Garden Fresh Salad</td>
-                        <td>Mixed greens with a lemon-tahini dressing.</td>
-                        <td>Sh.600</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+            <section class="glass-box flex-item">
+                <h3>Signature Highlights</h3>
+                <ul class="short-menu">
+                    <li><span>Sunrise Omelet</span> <span class="gold-text">Sh.650</span></li>
+                    <li><span>Paneer Tikka</span> <span class="gold-text">Sh.750</span></li>
+                    <li><span>Chicken Sizzler</span> <span class="gold-text">Sh.1200</span></li>
+                </ul>
+                <div style="margin-top: 25px; text-align: center;">
+                    <a href="order.html" class="order-button">VIEW FULL MENU & ORDER</a>
+                </div>
+            </section>
+        </div>
 
         <footer>
-            <p>Proud members of the <a href="https://www.hospitalitynet.org" target="_blank">Global Hospitality Network</a>.</p>
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <h3>Find Us</h3>
+                    <p>123 Sunrise Plaza, Nairobi</p>
+                    <p>📞 +254 712 345 678</p>
+                </div>
+                <div class="footer-links">
+                    <p>&copy; 2026 Sunrise Restaurant</p>
+                    <p>Members of the <a href="https://www.hospitalitynet.org" target="_blank" class="gold-text">Global Hospitality Network</a></p>
+                </div>
+            </div>
         </footer>
     </div>
 
+    <script>
+        const hour = new Date().getHours();
+        document.getElementById('greeting').innerText = hour < 12 ? "Good Morning!" : hour < 18 ? "Good Afternoon!" : "Good Evening!";
+    </script>
 </body>
 </html>

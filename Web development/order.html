@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Online | Sunrise Restaurant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="top-nav">
+        <div class="nav-content">
+            <img src="C:\Users\HP\Downloads\logo.png.jfif" alt="Logo" class="logo">
+            <h1 class="nav-title">SUNRISE RESTAURANT</h1>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div id="success-message" style="display: none;" class="message-box glass-box">
+            <h2>Order Received! ✅</h2>
+            <div id="receipt-summary"></div>
+            <button onclick="window.location.href='sunrise.html'" class="order-button" style="margin-top:20px;">Return Home</button>
+        </div>
+
+        <form id="orderForm" class="order-form glass-box">
+            <section>
+                <h3>1. Personal Details</h3>
+                <label>Email Address:</label>
+                <input type="email" id="user-email" placeholder="customer@example.com" required>
+                <label>Phone Number:</label>
+                <input type="tel" id="user-phone" placeholder="0712345678" required>
+            </section>
+
+            <section>
+                <h3>2. Select Your Meals (Full Menu)</h3>
+                <div class="order-list">
+                    <div class="order-item"><label><input type="checkbox" class="food-check" data-name="Sunrise Omelet" data-price="650"> Sunrise Omelet (650/-)</label><input type="number" class="food-qty" value="1" min="1" disabled></div>
+                    <div class="order-item"><label><input type="checkbox" class="food-check" data-name="Belgian Waffles" data-price="500"> Belgian Waffles (500/-)</label><input type="number" class="food-qty" value="1" min="1" disabled></div>
+                    <div class="order-item"><label><input type="checkbox" class="food-check" data-name="Spanish Breakfast" data-price="700"> Spanish Breakfast (700/-)</label><input type="number" class="food-qty" value="1" min="1" disabled></div>
+                    <div class="order-item"><label><input type="checkbox" class="food-check" data-name="Pancakes" data-price="450"> Pancakes (450/-)</label><input type="number" class="food-qty" value="1" min="1" disabled></div>
+                    <div class="order-item"><label><input type="checkbox" class="food-check" data-name="Fruit Platter" data-price="400"> Fruit Platter (400/-)</label><input type="number" class="food-qty" value="1" min="1" disabled></div>
+                    <div class="order-item"><label><input type="checkbox" class="food-check" data-name="Paneer Tikka" data-price="750"> Paneer Tikka (750/-)</label><input type="number" class="food-qty" value="1" min="1" disabled></div>
+                    <div class="order-item"><label><input type="checkbox" class="food-check" data-name="Grilled Chicken" data-price="1200"> Grilled Chicken (1200/-)</label><input type="number" class="food-qty" value="1" min="1" disabled></div>
+                    <div class="order-item"><label><input type="checkbox" class="food-check" data-name="Beef Stir-fry" data-price="950"> Beef Stir-fry (950/-)</label><input type="number" class="food-qty" value="1" min="1" disabled></div>
+                    <div class="order-item"><label><input type="checkbox" class="food-check" data-name="Vegetable Curry" data-price="650"> Vegetable Curry (650/-)</label><input type="number" class="food-qty" value="1" min="1" disabled></div>
+                    <div class="order-item"><label><input type="checkbox" class="food-check" data-name="Fish & Chips" data-price="850"> Fish & Chips (850/-)</label><input type="number" class="food-qty" value="1" min="1" disabled></div>
+                    <div class="order-item"><label><input type="checkbox" class="food-check" data-name="Mushroom Risotto" data-price="1100"> Mushroom Risotto (1100/-)</label><input type="number" class="food-qty" value="1" min="1" disabled></div>
+                    <div class="order-item"><label><input type="checkbox" class="food-check" data-name="Masala Chips" data-price="350"> Masala Chips (350/-)</label><input type="number" class="food-qty" value="1" min="1" disabled></div>
+                    <div class="order-item"><label><input type="checkbox" class="food-check" data-name="Garlic Bread" data-price="250"> Garlic Bread (250/-)</label><input type="number" class="food-qty" value="1" min="1" disabled></div>
+                    <div class="order-item"><label><input type="checkbox" class="food-check" data-name="Chocolate Brownie" data-price="450"> Chocolate Brownie (450/-)</label><input type="number" class="food-qty" value="1" min="1" disabled></div>
+                    <div class="order-item"><label><input type="checkbox" class="food-check" data-name="Ice Cream" data-price="200"> Ice Cream (200/-)</label><input type="number" class="food-qty" value="1" min="1" disabled></div>
+                </div>
+            </section>
+
+            <div class="total-display">Total Amount: <span id="total-price" class="gold-text">Sh.0</span></div>
+            <textarea id="delivery-location" placeholder="Delivery Address..." required></textarea>
+            <button type="submit" class="order-button" style="width: 100%;">CONFIRM ORDER</button>
+        </form>
+    </div>
+
+    <script>
+        const items = document.querySelectorAll('.order-item');
+        const priceDisp = document.getElementById('total-price');
+        function updatePrice() {
+            let total = 0;
+            items.forEach(it => {
+                const check = it.querySelector('.food-check');
+                const qty = it.querySelector('.food-qty');
+                if (check.checked) { qty.disabled = false; total += parseInt(check.dataset.price) * parseInt(qty.value); }
+                else { qty.disabled = true; }
+            });
+            priceDisp.innerText = "Sh." + total;
+        }
+        document.querySelectorAll('.food-check, .food-qty').forEach(el => el.addEventListener('input', updatePrice));
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let receipt = "<h4>Order Breakdown:</h4><ul>";
+            let grandTotal = 0;
+            items.forEach(it => {
+                const check = it.querySelector('.food-check');
+                if (check.checked) {
+                    let sub = parseInt(check.dataset.price) * it.querySelector('.food-qty').value;
+                    grandTotal += sub;
+                    receipt += `<li>${it.querySelector('.food-qty').value}x ${check.dataset.name} - Sh.${sub}</li>`;
+                }
+            });
+            receipt += `</ul><p><strong>Total: Sh.${grandTotal}</strong></p>`;
+            document.getElementById('receipt-summary').innerHTML = receipt;
+            document.getElementById('orderForm').style.display = 'none';
+            document.getElementById('success-message').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
