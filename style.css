@@ -3,6 +3,105 @@ body { background-color: #050505; color: #ffffff; font-family: 'Segoe UI', sans-
 .wide-container { width: 90%; max-width: 1200px; margin: 0 auto; }
 .main-container { max-width: 800px; margin: 0 auto; padding: 20px; }
 
+/* Premium Console Link Button Style */
+.btn-dashboard-link {
+    display: inline-block;
+    background-color: #e2c799;       /* Your signature Sunrise Gold background */
+    color: #0b0c10;                  /* Dark contrast text */
+    border: 2px solid #e2c799;
+    padding: 14px 30px;
+    font-size: 0.95rem;
+    font-weight: 800;                /* Strong, bold text styling */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 30px;             /* Pillow oval design shape matching your site */
+    text-decoration: none;           /* Removes default underline */
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 15px rgba(226, 199, 153, 0.2);
+    margin: 15px 0;
+}
+
+/* Gold Interactive Hover State Transition */
+.btn-dashboard-link:hover {
+    background-color: transparent;    /* Flips background to reveal your dark page theme */
+    color: #e2c799;                  /* Text turns gold */
+    box-shadow: 0 6px 20px rgba(226, 199, 153, 0.4);
+    transform: translateY(-2px);     /* Smooth elevate animation effect */
+}
+
+/* Center alignment rule for the button parent wrapper */
+.button-center-container {
+    display: block;
+    width: 100%;
+    text-align: center; /* Centers inline elements like the button link */
+    margin: 35px 0;    /* Adds clean space above and below the button */
+    clear: both;
+}
+
+/* Your visible button layout configurations (leave as is) */
+.btn-dashboard-link {
+    display: inline-block !important;
+    background-color: #e2c799 !important; 
+    border: 2px solid #e2c799 !important;
+    color: #0b0c10 !important;
+    padding: 15px 35px !important;
+    font-size: 1rem !important;
+    font-weight: 900 !important;          
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    border-radius: 30px !important;        
+    text-decoration: none !important;      
+    transition: all 0.3s ease-in-out !important;
+    box-shadow: 0 4px 20px rgba(226, 199, 153, 0.3) !important; 
+}
+
+.btn-dashboard-link:hover {
+    background-color: transparent !important; 
+    color: #e2c799 !important;               
+    box-shadow: 0 6px 25px rgba(226, 199, 153, 0.5) !important;
+    transform: translateY(-2px) !important;  
+}
+
+/* Premium Oval Back Button Styling */
+.btn-back-home {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    background-color: transparent;
+    color: var(--brand-gold);
+    border: 2px solid var(--brand-gold);
+    padding: 10px 24px;
+    border-radius: 30px; /* Pillow oval contour */
+    font-size: 0.85rem;
+    font-weight: 800; /* Extra strong text weight */
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 10px rgba(226, 199, 153, 0.1);
+    transition: all 0.3s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Interactive Gold Hover State */
+.btn-back-home:hover {
+    background-color: var(--brand-gold);
+    color: #0b0c10; /* Switches to dark contrast text */
+    box-shadow: 0 4px 18px rgba(226, 199, 153, 0.4);
+    transform: translateY(-2px); /* Smooth elevation lift */
+}
+
+/* Responsive adjustment for small screens/mobile */
+@media (max-width: 820px) {
+    .btn-back-home {
+        position: static;
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+}
+
 /* --- CENTERED NAV & LOGO --- */
 .top-nav { display: flex; justify-content: center; align-items: center; padding: 30px 0; background: #000; border-bottom: 1px solid #1a1a1a; }
 .nav-content { display: flex; align-items: center; gap: 20px; }

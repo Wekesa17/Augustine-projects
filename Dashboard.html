@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Management Console | Sunrise Restaurant & Stay</title>
+    <style>
+        /* Sunrise Premium Brand Style Guide Alignment */
+        :root {
+            --brand-gold: #e2c799;       
+            --brand-dark-bg: #0b0c10;    
+            --card-bg: #14171c;          
+            --text-main: #ffffff;        
+            --text-muted: #b3b3b3;       
+            --danger-color: #ff6b6b;
+            --success-color: #2ecc71;
+            --border-radius: 12px;       
+            --transition: all 0.3s ease-in-out;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--brand-dark-bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px 15px 5px 15px;
+        }
+
+        /* Branding Header Elements */
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .logo-container {
+            width: 75px;
+            height: 75px;
+            background-color: var(--text-main);
+            border-radius: 50%;
+            margin: 0 auto 12px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--brand-gold);
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(226, 199, 153, 0.2);
+        }
+
+        .logo-container img {
+            width: 85%;
+            height: 85%;
+            object-fit: contain;
+        }
+
+        h1.brand-title {
+            color: var(--brand-gold);
+            font-size: 2.3rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin: 0 0 4px 0;
+            font-weight: 900; /* Distinctly heavy strong headline */
+        }
+
+        .brand-subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* Premium Oval Control Navigation Tabs */
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            background-color: var(--card-bg);
+            color: var(--text-muted);
+            border: 1px solid rgba(226, 199, 153, 0.2);
+            padding: 12px 35px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background-color: var(--brand-gold);
+            color: #1a1a1a;
+            box-shadow: 0 4px 15px rgba(222, 199, 153, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+            max-width: 1250px;
+            margin: 0 auto;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Premium Automatic Slider Layout (Full Width Top Showcase Container) */
+        .showcase-carousel-wrapper {
+            width: 100%;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            border: 1px solid rgba(226, 199, 153, 0.15);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+            position: relative;
+            background: var(--card-bg);
+        }
+
+        .carousel-track {
+            display: flex;
+            width: 400%; /* Dynamic expansion sizing rule for 4 showcase frame targets */
+            animation: slideAnimation 20s infinite ease-in-out;
+            transition: transform 0.8s cubic-bezier(0.45, 0, 0.55, 1);
+        }
+
+        /* Alternate track mapping definitions for separated features */
+        #res-carousel .carousel-track { animation-name: resSlide; }
+        #bnb-carousel .carousel-track { animation-name: bnbSlide; }
+
+        .carousel-slide {
+            width: 25%;
+            height: 280px;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .slide-overlay-caption {
+            background: linear-gradient(to top, rgba(11,12,16,0.95) 30%, rgba(11,12,16,0));
+            width: 100%;
+            padding: 40px 25px 20px 25px;
+            box-sizing: border-box;
+        }
+
+        .slide-overlay-caption h3 {
+            margin: 0 0 5px 0;
+            color: var(--brand-gold);
+            font-size: 1.4rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .slide-overlay-caption p {
+            margin: 0;
+            color: #e0e0e0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* Space-Saving Side-by-Side Split Workspace Layout */
+        .workspace-split {
+            display: grid;
+            grid-template-columns: 1fr 1.35fr;
+            gap: 25px;
+            align-items: start;
+        }
+
+        @media (max-width: 980px) {
+            .workspace-split {
+                grid-template-columns: 1fr;
+            }
+            .carousel-slide { height: 220px; }
+        }
+
+        /* Structural Container Cards styling matching "Our Services" layout */
+        .card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(226, 199, 153, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-sizing: border-box;
+        }
+
+        .card h2 {
+            color: var(--brand-gold);
+            font-size: 1.35rem;
+            margin-top: 0;
+            margin-bottom: 22px;
+            border-bottom: 2px solid var(--brand-gold); /* Prominent visual divider line */
+            padding-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 900; /* Extra strong headline */
+        }
+
+        /* Compact Vertical Stacked Form Setup */
+        .form-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+            font-weight: 800; /* Heavy strong label styling */
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--brand-gold);
+        }
+
+        .form-group input, .form-group select {
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background-color: #1a1e24; /* Clean explicit dark mode backdrop */
+            color: var(--text-main);
+            box-sizing: border-box;
+        }
+
+        /* FIX: Solves browser default dropdown white option rendering bug */
+        .form-group select option {
+            background-color: #14171c; 
+            color: var(--text-main);
+            padding: 12px;
+        }
+
+        .form-group input[type="date"], .form-group input[type="time"] {
+            color-scheme: dark;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--brand-gold);
+            outline: none;
+            box-shadow: 0 0 8px rgba(226, 199, 153, 0.3);
+        }
+
+        /* Dynamic System Feedback Banner text layout */
+        .status-msg {
+            font-size: 0.9rem;
+            font-weight: 800;
+            text-align: center;
+            min-height: 20px;
+            margin-top: 4px;
+        }
+        .status-success { color: var(--success-color); }
+        .status-error { color: var(--danger-color); }
+
+        /* Button styled exactly like "VIEW FULL MENU & ORDER" button */
+        .btn-submit {
+            background-color: var(--brand-gold);
+            color: #1a1a1a;
+            border: 2px solid var(--brand-gold);
+            padding: 14px 20px;
+            font-size: 0.9rem;
+            font-weight: 900;
+            border-radius: 30px; /* Pillow oval contour template */
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        .btn-submit:hover {
+            background-color: transparent;
+            color: var(--brand-gold);
+            box-shadow: 0 4px 15px rgba(222, 199, 153, 0.2);
+        }
+
+        /* Complete Grid Log Book Layout configuration */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 14px 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.85rem;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: rgba(255, 255, 255, 0.02);
+            color: var(--brand-gold);
+            font-weight: 900; /* Maximum bold heading weighting values */
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+        }
+
+        td { color: var(--text-muted); }
+        tr:hover td { color: var(--text-main); background-color: rgba(226, 199, 153, 0.03); }
+
+        .empty-message {
+            text-align: center;
+            color: var(--text-muted);
+            font-style: italic;
+            padding: 40px 20px;
+        }
+
+        .badge {
+            background: rgba(226, 199, 153, 0.15);
+            color: var(--brand-gold);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            display: inline-block;
+        }
+
+        .btn-delete {
+            background-color: transparent;
+            color: var(--danger-color);
+            border: 1px solid var(--danger-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            transition: var(--transition);
+        }
+
+        .btn-delete:hover {
+            background-color: var(--danger-color);
+            color: var(--text-main);
+        }
+
+        /* --- CAROUSEL ANIMATION RHYTHM MATRICES --- */
+        /* Smooth looping sequence patterns across 4 item targets: (0% -> 25% -> 50% -> 75%) */
+        @keyframes resSlide {
+            0%, 22%   { transform: translateX(0%); }
+            25%, 47%  { transform: translateX(-25%); }
+            50%, 72%  { transform: translateX(-50%); }
+            75%, 97%  { transform: translateX(-75%); }
+        }
+
+        @keyframes bnbSlide {
+            0%, 22%   { transform: translateX(0%); }
+            25%, 47%  { transform: translateX(-25%); }
+            50%, 72%  { transform: translateX(-50%); }
+            75%, 97%  { transform: translateX(-75%); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="Sunrise Logo" onerror="this.src='https://img.icons8.com/color/96/chef-hat.png'">
+        </div>
+        <h1 class="brand-title">Sunrise Management Console</h1>
+        <div class="brand-subtitle">Premium Concierge Systems • Nairobi, Kenya</div>
+    </header>
+
+    <div class="tab-container">
+        <button class="tab-btn active" onclick="switchTab('restaurant-tab', this)">Restaurant Tables</button>
+        <button class="tab-btn" onclick="switchTab('airbnb-tab', this)">Airbnb & Stays</button>
+    </div>
+
+    <div id="restaurant-tab" class="tab-content active">
+        
+        <div class="showcase-carousel-wrapper" id="res-carousel">
+            <div class="carousel-track">
+                <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80');">
+                    <div class="slide-overlay-caption">
+                        <h3>Main Dining Commons</h3>
+                        <p>Elegant layouts configured fluidly for couple dates, family assemblies, and standard reservations.</p>
+                    </div>
+                </div>
+                <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80');">
+                    <div class="slide-overlay-caption">
+                        <h3>The Paneer Tikka Corner</h3>
+                        <p>Perfect ambiance for savoring signature recipes fresh from the flame.</p>
+                    </div>
+                </div>
+                <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1578474846511-04ba529f0b88?auto=format&fit=crop&w=1200&q=80');">
+                    <div class="slide-overlay-caption">
+                        <h3>Windowside Family Booths</h3>
+                        <p>Spacious premium 4 to 5 capacity booth structures looking out across urban skylines.</p>
+                    </div>
+                </div>
+                <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1560624052-449f5ddf0c31?auto=format&fit=crop&w=1200&q=80');">
+                    <div class="slide-overlay-caption">
+                        <h3>Sunrise Elite VIP Lounge</h3>
+                        <p>Exclusive, secluded comfort zones reserved for executive parties, gatherings, and custom celebrations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="workspace-split">
+            <div class="card">
+                <h2>Table Reservation Form</h2>
+                <form id="resForm" class="form-vertical">
+                    <div class="form-group">
+                        <label for="resName">Guest Full Name</label>
+                        <input type="text" id="resName" required placeholder="e.g. Jomo Omondi">
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                        <div class="form-group">
+                            <label for="resPhone">Phone Number</label>
+                            <input type="tel" id="resPhone" required placeholder="0712 345 678">
+                        </div>
+                        <div class="form-group">
+                            <label for="resEmail">Email Address</label>
+                            <input type="email" id="resEmail" required placeholder="jomo@domain.com">
+                        </div>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                        <div class="form-group">
+                            <label for="resDate">Target Date</label>
+                            <input type="date" id="resDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="resTime">Time Slot</label>
+                            <input type="time" id="resTime" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="resSize">Table Allocation Tier</label>
+                        <select id="resSize" required>
+                            <option value="Table for 2">Table for 2 People</option>
+                            <option value="Table for 4">Table for 4 People</option>
+                            <option value="Table for 5">Table for 5 People</option>
+                            <option value="VIP Lounge (6+)">VIP Lounge (6+ People)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-submit">Confirm Table</button>
+                    <div id="resStatus" class="status-msg"></div>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>Live Booked Tables Record</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Index</th>
+                                <th>Guest Identity Details</th>
+                                <th>Timeline</th>
+                                <th>Allocation</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resTableBody"></tbody>
+                    </table>
+                    <div id="resEmptyState" class="empty-message">No active dining reservations loaded.</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="airbnb-tab" class="tab-content">
+        
+        <div class="showcase-carousel-wrapper" id="bnb-carousel">
+            <div class="carousel-track">
+                <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=1200&q=80');">
+                    <div class="slide-overlay-caption">
+                        <h3>Savannah Cozy Studio (Sh. 6,500/nt)</h3>
+                        <p>Smart entertainment integration, high-speed Wi-Fi matrix, and ergonomic workspaces tailored for solo travelers.</p>
+                    </div>
+                </div>
+                <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80');">
+                    <div class="slide-overlay-caption">
+                        <h3>Executive 1-Bedroom Suite (Sh. 10,000/nt)</h3>
+                        <p>Spacious balcony panoramas, a fully equipped integrated kitchen, and private interior laundry access.</p>
+                    </div>
+                </div>
+                <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80');">
+                    <div class="slide-overlay-caption">
+                        <h3>Luxury Nile Penthouse Suite (Sh. 18,500/nt)</h3>
+                        <p>Panoramic city views, a fully stocked minibar lounge, and a luxury hot tub setup.</p>
+                    </div>
+                </div>
+                <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80');">
+                    <div class="slide-overlay-caption">
+                        <h3>Premium Hospitality Add-on Services</h3>
+                        <p>Elevate stays with curated amenities, from airport shuttle pickups to personalized fine-dining chef packages.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="workspace-split">
+            <div class="card">
+                <h2>Stay Booking Desk</h2>
+                <form id="bnbForm" class="form-vertical">
+                    <div class="form-group">
+                        <label for="bnbName">Guest Full Name</label>
+                        <input type="text" id="bnbName" required placeholder="e.g. Elena Vance">
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                        <div class="form-group">
+                            <label for="bnbPhone">Phone Number</label>
+                            <input type="tel" id="bnbPhone" required placeholder="0722 000 111">
+                            </div>
+                        <div class="form-group">
+                            <label for="bnbEmail">Email Address</label>
+                            <input type="email" id="bnbEmail" required placeholder="elena@domain.com">
+                        </div>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                        <div class="form-group">
+                            <label for="bnbCheckIn">Check-In Date</label>
+                            <input type="date" id="bnbCheckIn" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bnbNights">Nights count</label>
+                            <input type="number" id="bnbNights" required min="1" value="1">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bnbRoom">Suite Tier Selection</label>
+                        <select id="bnbRoom" required>
+                            <option value="Savannah Cozy Studio">Savannah Cozy Studio - Sh. 6,500/night</option>
+                            <option value="Executive 1-Bedroom">Executive 1-Bedroom - Sh. 10,000/night</option>
+                            <option value="Luxury Nile Penthouse">Luxury Nile Penthouse - Sh. 18,500/night</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="bnbService">Add-on Hospitality Services</label>
+                        <select id="bnbService" required>
+                            <option value="Standard Stay (Self Catering)">Standard Stay (Self Catering)</option>
+                            <option value="Bed & Breakfast (Plus Sunrise Omelet)">Bed & Breakfast (+ Sunrise Omelet)</option>
+                            <option value="VIP All-Inclusive (Chef + Airport Pick)">VIP All-Inclusive (Chef + Airport Pick)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-submit">Reserve Suite</button>
+                    <div id="bnbStatus" class="status-msg"></div>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>Active Stay Records</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Index</th>
+                                <th>Guest Identity Details</th>
+                                <th>Check In</th>
+                                <th>Suite Tier</th>
+                                <th>Services Package</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bnbTableBody"></tbody>
+                    </table>
+                    <div id="bnbEmptyState" class="empty-message">No active suite check-ins logged.</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Data Store Synchronization Matrix Initialization
+        let tableReservations = JSON.parse(localStorage.getItem('sunriseTablesV3')) || [];
+        let bnbReservations = JSON.parse(localStorage.getItem('sunriseBnbV3')) || [];
+
+        // Tab Alternator Link Toggle Control Engine
+        function switchTab(tabId, el) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            el.classList.add('active');
+        }
+
+        // --- RESTAURANT CORE CONTROLLER ---
+        const resForm = document.getElementById('resForm');
+        const resStatus = document.getElementById('resStatus');
+
+        resForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('resName').value;
+            const phone = document.getElementById('resPhone').value;
+            const email = document.getElementById('resEmail').value;
+            const date = document.getElementById('resDate').value;
+            const time = document.getElementById('resTime').value;
+            const size = document.getElementById('resSize').value;
+
+            // Strict Validation Check Matrix
+            const isBooked = tableReservations.some(res => res.date === date && res.time === time && res.size === size);
+
+            if (isBooked) {
+                resStatus.className = "status-msg status-error";
+                resStatus.innerText = `Slot unavailable! A ${size} is already booked at this time.`;
+                return;
+            }
+
+            const newRes = { id: Date.now(), name, phone, email, date, time, size };
+            tableReservations.push(newRes);
+            localStorage.setItem('sunriseTablesV3', JSON.stringify(tableReservations));
+            
+            resStatus.className = "status-msg status-success";
+            resStatus.innerText = "Table available! Booking successfully recorded.";
+            resForm.reset();
+            renderRestaurantTable();
+        });
+
+        function deleteRes(id) {
+            tableReservations = tableReservations.filter(r => r.id !== id);
+            localStorage.setItem('sunriseTablesV3', JSON.stringify(tableReservations));
+            renderRestaurantTable();
+        }
+
+        function renderRestaurantTable() {
+            const tbody = document.getElementById('resTableBody');
+            const empty = document.getElementById('resEmptyState');
+            tbody.innerHTML = '';
+            
+            if(tableReservations.length === 0) { empty.style.display = 'block'; return; }
+            empty.style.display = 'none';
+
+            tableReservations.forEach((r, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><b style="color:var(--brand-gold);">#${index + 1}</b></td>
+                    <td>
+                        <strong style="color:var(--text-main); font-size:0.95rem;">${escapeHtml(r.name)}</strong><br>
+                        <small style="color:var(--text-muted);">${escapeHtml(r.phone)}<br>${escapeHtml(r.email)}</small>
+                    </td>
+                    <td>${r.date}<br><small style="background:rgba(255,255,255,0.08); padding:2px 6px; border-radius:4px;">${r.time}</small></td>
+                    <td><span class="badge">${r.size}</span></td>
+                    <td><button class="btn-delete" onclick="deleteRes(${r.id})">Cancel</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // --- AIRBNB CORE CONTROLLER ---
+        const bnbForm = document.getElementById('bnbForm');
+        const bnbStatus = document.getElementById('bnbStatus');
+
+        bnbForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('bnbName').value;
+            const phone = document.getElementById('bnbPhone').value;
+            const email = document.getElementById('bnbEmail').value;
+            const checkIn = document.getElementById('bnbCheckIn').value;
+            const nights = document.getElementById('bnbNights').value;
+            const room = document.getElementById('bnbRoom').value;
+            const service = document.getElementById('bnbService').value;
+
+            // Conflict Validation Rule Matching Algorithm
+            const isRoomTaken = bnbReservations.some(b => b.checkIn === checkIn && b.room === room);
+
+            if (isRoomTaken) {
+                bnbStatus.className = "status-msg status-error";
+                bnbStatus.innerText = "Slot unavailable! This room configuration is already reserved for this date.";
+                return;
+            }
+
+            const newBnb = { id: Date.now(), name, phone, email, checkIn, nights, room, service };
+            bnbReservations.push(newBnb);
+            localStorage.setItem('sunriseBnbV3', JSON.stringify(bnbReservations));
+
+            bnbStatus.className = "status-msg status-success";
+            bnbStatus.innerText = "Room available! Stay successfully processed.";
+            bnbForm.reset();
+            renderBnbTable();
+        });
+
+        function deleteBnb(id) {
+            bnbReservations = bnbReservations.filter(b => b.id !== id);
+            localStorage.setItem('sunriseBnbV3', JSON.stringify(bnbReservations));
+            renderBnbTable();
+        }
+
+        function renderBnbTable() {
+            const tbody = document.getElementById('bnbTableBody');
+            const empty = document.getElementById('bnbEmptyState');
+            tbody.innerHTML = '';
+
+            if(bnbReservations.length === 0) { empty.style.display = 'block'; return; }
+            empty.style.display = 'none';
+
+            bnbReservations.forEach((b, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><b style="color:var(--brand-gold);">#${index + 1}</b></td>
+                    <td>
+                        <strong style="color:var(--text-main); font-size:0.95rem;">${escapeHtml(b.name)}</strong><br>
+                        <small style="color:var(--text-muted);">${escapeHtml(b.phone)}<br>${escapeHtml(b.email)}</small>
+                    </td>
+                    <td>${b.checkIn}<br><small style="color:var(--brand-gold); font-weight:700;">${b.nights} Night(s)</small></td>
+                    <td><span class="badge">${b.room}</span></td>
+                    <td><small style="display:block; max-width:130px; line-height:1.2;">${b.service}</small></td>
+                    <td><button class="btn-delete" onclick="deleteBnb(${b.id})">Remove</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/[&<>'"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[c] || c));
+        }
+
+        // Initialize UI display updates on document load
+        renderRestaurantTable();
+        renderBnbTable();
+    </script>
+
+    
+     <a href="index.html" class="btn-back-home">Back to Home</a>
+     <style>
+        /* Premium Oval Back Button Styling */
+.btn-back-home {
+    display: inline-flex !important; /* Forces the browser to treat it as a structural block element */
+    align-items: center;
+    justify-content: center;
+    background-color: transparent !important;
+    color: #e2c799 !important; /* Signature Sunrise Gold text */
+    border: 2px solid #e2c799 !important; /* Gold perimeter border line */
+    padding: 10px 24px !important; /* Gives the link physical volume and button height */
+    border-radius: 30px !important; /* Pillow oval design contour */
+    font-size: 0.85rem !important;
+    font-weight: 800 !important; /* Heavy strong typography weight */
+    text-decoration: none !important; /* Completely blocks standard text underlining */
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 10px rgba(226, 199, 153, 0.1) !important;
+    transition: all 0.3s ease-in-out !important;
+    
+    /* Layout positioning inside your header container workspace */
+    position: absolute;
+    top: 20px;
+    left: 10px;
+}
+
+/* Gold Interactive Hover Transition */
+.btn-back-home:hover {
+    background-color: #e2c799 !important; /* Fills button shape with solid gold */
+    color: #0b0c10 !important; /* Flips text dark for strong contrast visibility */
+    box-shadow: 0 4px 18px rgba(226, 199, 153, 0.4) !important;
+    transform: translateY(-2px) !important; /* Smooth hover elevation lift animation */
+}
+
+/* Responsive adjustment for clean presentation on narrow/mobile devices */
+@media (max-width: 820px) {
+    .btn-back-home {
+        position: static !important;
+        display: inline-block !important;
+        margin-bottom: 20px !important;
+    }
+}
+     </style>
+     <footer>
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <h3>Find Us</h3>
+                    <p>123 Sunrise Plaza, Nairobi</p>
+                    <p>📞 +254 722 000 000</p>
+                </div>
+                <div class="footer-links">
+                    <p>&copy; 2026 Sunrise Restaurant</p>
+                    <p>Members of the <a href="https://www.hospitalitynet.org" target="_blank" class="gold-text">Global Hospitality Network</a></p>
+                </div>
+            </div>
+        </footer>
+        <style>
+            /* --- FOOTER --- */
+footer { border-top: 1px solid #222; padding: 40px 0; margin-top: 50px; }
+.footer-grid { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; }
+
+        </style>
+</body>
+</html>
