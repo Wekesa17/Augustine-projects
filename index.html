@@ -5,6 +5,195 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sunrise Restaurant | Home</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* CSS Variables Matching Brand Guide */
+        :root {
+            --brand-gold: #e2c799;       
+            --brand-dark-bg: #0b0c10;    
+            --card-bg: #14171c;          
+            --text-main: #ffffff;        
+            --text-muted: #b3b3b3;       
+            --border-radius: 16px; /* Enhanced slightly for smoother corner curvatures */
+            --transition: all 0.3s ease-in-out;
+        }
+
+        /* 1. Side-By-Side Grid Layout: Premium Dining Split with Sunrise Estate */
+        .main-split-hero {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 30px;
+            align-items: center;
+            margin-top: 20px;
+            margin-bottom: 45px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 900px) {
+            .main-split-hero {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hero-header-text h2 {
+            color: var(--brand-gold);
+            font-size: 2.3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 10px 0 15px 0;
+            font-weight: 900;
+        }
+
+        .hero-header-text p {
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* Sunrise restaurant Building Feature Card */
+        .building-showcase-box {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(226, 199, 153, 0.15);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .building-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .building-details {
+            padding: 25px;
+        }
+
+        .building-details h3 {
+            color: var(--brand-gold);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+            font-weight: 900;
+        }
+
+        /* 2. Curved Horizontal Full-Width Slider Layout Framework */
+        .full-bleed-slider-container {
+            width: calc(100vw - 40px); /* Subtracting lateral margins to allow curves to show */
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: calc(-50vw + 20px);
+            margin-right: calc(-50vw + 20px);
+            overflow: hidden;
+            margin-bottom: 45px;
+            border-radius: var(--border-radius); /* Curves the slider edges */
+            box-shadow: 0 12px 35px rgba(0,0,0,0.75);
+            border: 1px solid rgba(226, 199, 153, 0.15);
+        }
+
+        .slider {
+            display: flex;
+            width: 600%; /* Sized side-by-side precisely for 6 image tracking frames */
+            animation: automaticHorizontalSixSlide 24s infinite ease-in-out;
+        }
+
+        .slider img {
+            width: 16.6666%; 
+            height: 340px;   /* Clean dashboard-inspired landscape tracking height */
+            object-fit: cover;
+        }
+
+        /* Smooth 6-step horizontal sliding timeline matrix */
+        @keyframes automaticHorizontalSixSlide {
+            0%, 13%    { transform: translateX(0%); }
+            16%, 29%   { transform: translateX(-16.6666%); }
+            32%, 45%   { transform: translateX(-33.3333%); }
+            48%, 61%   { transform: translateX(-50%); }
+            64%, 77%   { transform: translateX(-66.6666%); }
+            80%, 93%   { transform: translateX(-83.3333%); }
+            100%       { transform: translateX(0%); }
+        }
+
+        /* Content Wrappers to restrict width of non-slider elements */
+        .standard-layout-block {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        /* Centered Dashboard Redirection Button Layout */
+        .button-center-container {
+            display: block !important;
+            width: 100% !important;
+            text-align: center !important;
+            margin: 45px auto 15px auto !important;
+            clear: both !important;
+        }
+
+        .btn-dashboard-link {
+            display: inline-block !important;
+            background-color: var(--brand-gold) !important;
+            border: 2px solid var(--brand-gold) !important;
+            color: #0b0c10 !important;
+            padding: 16px 40px !important;
+            font-size: 0.95rem !important;
+            font-weight: 900 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 2px !important;
+            border-radius: 30px !important;
+            text-decoration: none !important;
+            box-shadow: 0 4px 20px rgba(226, 199, 153, 0.25) !important;
+            transition: var(--transition) !important;
+            cursor: pointer !important;
+        }
+
+        .btn-dashboard-link:hover {
+            background-color: transparent !important;
+            color: var(--brand-gold) !important;
+            box-shadow: 0 6px 25px rgba(226, 199, 153, 0.5) !important;
+            transform: translateY(-3px) !important;
+        }
+
+        /* 3. Live System Status Bar - Positioned Just Below Booking Button */
+        .live-status-bar {
+            background: rgba(226, 199, 153, 0.08);
+            border-left: 4px solid var(--brand-gold);
+            padding: 12px 20px;
+            border-radius: 4px;
+            margin: 0 auto 40px auto; 
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            box-sizing: border-box;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #2ecc71;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px #2ecc71;
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.5; }
+        }
+    </style>
 </head>
 <body>
 
@@ -15,28 +204,45 @@
         </div>
     </nav>
 
-    <div class="wide-container">
-        <header class="hero-header">
-            <div class="intro-text">
-                 <p id="greeting" class="gold-text"></p>
-                <h2>Premium Dining in Nairobi</h2>
-                <p>Sunrise Restaurant offers a unique fusion of traditional Kenyan flavors and contemporary international cuisine. Established in 2024, we aim to provide an unforgettable dining experience with world-class hospitality.</p>
-            </div>
-            
-            <div class="slider-wrapper">
-                <div class="slider">
-                    <img id="slide-1" src="paneer tikka 😋.jfif" alt="Paneer Tikka">
-                    <img id="slide-2" src="Red Velvet Strawberry Cheesecake.jfif" alt="Breakfast">
-                    <img id="slide-3" src="Um hambúrguer com bacon e queijo_ _ imagem Premium gerada com IA.jfif" alt="Dinner">
-                </div>
-                <div class="slider-nav">
-                    <a href="#slide-1"></a>
-                    <a href="#slide-2"></a>
-                    <a href="#slide-3"></a>
-                </div>
-            </div>
-        </header>
+    <div class="main-split-hero">
+        <div class="hero-header-text">
+            <p id="greeting" class="gold-text"></p>
+            <h2>Premium Dining in Nairobi</h2>
+            <p>Sunrise Restaurant offers a unique fusion of traditional Kenyan flavors and contemporary international cuisine. Established in 2024, we aim to provide an unforgettable dining experience with world-class hospitality.</p>
+        </div>
 
+        <div class="building-showcase-box">
+            <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=800&q=80" alt="Sunrise Premium Restaurant Building" class="building-img">
+            <div class="building-details">
+                <h3>SUNRISE RESTAURANT</h3>
+                <p style="color: var(--text-muted); line-height: 1.5; margin: 0 0 15px 0; font-size: 0.9rem;">
+                    Located in the heart of Nairobi, our architectural flagship features panoramic dining view areas, custom luxury aesthetic spaces, and private lounges built for premium comfort.
+                </p>
+                <span style="color: var(--brand-gold); font-size: 0.8rem; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase;">
+                    📍 123 Sunrise Plaza • Open Daily: 7 AM — 11 PM
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="full-bleed-slider-container">
+        <div class="slider">
+            <img id="slide-1" src="https://images.unsplash.com/photo-1431540015161-0bf868a2d407?auto=format&fit=crop&w=1600&q=80" alt="Corporate Team Business Lounge Meeting">
+            
+            <img id="slide-2" src="https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=1600&q=80" alt="Premium Luxury Buffet Setup">
+            
+            <img id="slide-3" src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=1600&q=80" alt="Professional Culinary Team Kitchen Active">
+            
+            <img id="slide-4" src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1600&q=80" alt="Aerial Drone Architecture Estate Overview">
+            
+            <img id="slide-5" src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1600&q=80" alt="Main Luxury Dinner Banquet Layout Hall">
+            
+            <img id="slide-6" src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1600&q=80" alt="High End Artisanal Bar Mixology Craft">
+        </div>
+    </div>
+
+    <div class="standard-layout-block">
+        
         <div class="flex-row">
             <section class="glass-box flex-item">
                 <h3>Our Services</h3>
@@ -44,8 +250,9 @@
                     <li>Fine Dining & Ala Carte Menu</li>
                     <li>Fast Home & Office Delivery</li>
                     <li>Outside Catering Services</li>
-                    <li>Private VIP Lounge Bookings</li>
+                    <li>Private VIP Lounge Bookings and board meetings</li>
                     <li>Custom Celebration Cakes</li>
+                    
                 </ol>
             </section>
 
@@ -61,9 +268,16 @@
                 </div>
             </section>
         </div>
+
         <div class="button-center-container">
-<a href="Dashboard.html" class="btn-dashboard-link">BOOKINGD AND RESERVATIONS</a>
+            <a href="Dashboard.html" class="btn-dashboard-link">BOOKINGS AND RESERVATIONS</a>
         </div>
+
+        <div class="live-status-bar">
+            <span><span class="pulse-dot"></span> &nbsp;<strong>System Status: </strong>     ONLINE!!!!</span>
+            <span id="live-time" style="color: var(--brand-gold); font-weight: 700;"></span>
+        </div>
+
         <footer>
             <div class="footer-grid">
                 <div class="footer-info">
@@ -82,6 +296,14 @@
     <script>
         const hour = new Date().getHours();
         document.getElementById('greeting').innerText = hour < 12 ? "Good Morning!" : hour < 18 ? "Good Afternoon!" : "Good Evening!";
+
+        // Dynamic System Status Clock Engine Update
+        function updateLiveTime() {
+            const now = new Date();
+            document.getElementById('live-time').innerText = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        }
+        updateLiveTime();
+        setInterval(updateLiveTime, 30000);
     </script>
 </body>
 </html>

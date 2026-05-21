@@ -114,13 +114,6 @@ body { background-color: #050505; color: #ffffff; font-family: 'Segoe UI', sans-
 .intro-text h2 { font-size: 2.5rem; color: #fbd38d; margin-top: 10px; }
 .gold-text { color: #fbd38d; font-weight: bold; }
 
-/* --- IMAGE SLIDER --- */
-.slider-wrapper { flex: 1.5; min-width: 350px; border-radius: 15px; overflow: hidden; position: relative; border: 1px solid #333; }
-.slider { display: flex; aspect-ratio: 16/9; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; }
-.slider::-webkit-scrollbar { display: none; }
-.slider img { flex: 1 0 100%; object-fit: cover; }
-.slider-nav { display: flex; column-gap: 10px; position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); }
-.slider-nav a { width: 10px; height: 10px; border-radius: 50%; background: #fff; opacity: 0.5; }
 
 /* --- FLEX BOXES (SIDE BY SIDE) --- */
 .flex-row { display: flex; gap: 20px; margin-bottom: 50px; flex-wrap: wrap; }
