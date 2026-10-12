@@ -362,6 +362,12 @@
             50%, 72%  { transform: translateX(-50%); }
             75%, 97%  { transform: translateX(-75%); }
         }
+
+        .workspace-split {
+            display: block;
+            width: 100%;
+
+        }
     </style>
 </head>
 <body>
@@ -452,24 +458,7 @@
                 </form>
             </div>
 
-            <div class="card">
-                <h2>Live Booked Tables Record</h2>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Index</th>
-                                <th>Guest Identity Details</th>
-                                <th>Timeline</th>
-                                <th>Allocation</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="resTableBody"></tbody>
-                    </table>
-                    <div id="resEmptyState" class="empty-message">No active dining reservations loaded.</div>
-                </div>
-            </div>
+           
         </div>
 
     </div>
@@ -554,25 +543,7 @@
                 </form>
             </div>
 
-            <div class="card">
-                <h2>Active Stay Records</h2>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Index</th>
-                                <th>Guest Identity Details</th>
-                                <th>Check In</th>
-                                <th>Suite Tier</th>
-                                <th>Services Package</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="bnbTableBody"></tbody>
-                    </table>
-                    <div id="bnbEmptyState" class="empty-message">No active suite check-ins logged.</div>
-                </div>
-            </div>
+            
         </div>
 
     </div>
@@ -791,5 +762,27 @@ footer { border-top: 1px solid #222; padding: 40px 0; margin-top: 50px; }
 .footer-grid { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; }
 
         </style>
+<script>
+        function localToday() {
+            const d = new Date();
+            const y = d.getFullYear();
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return `${y}-${month}-${day}`;
+        }
+
+        document.getElementById('resDate').setAttribute('min', localToday());
+  </script>  
+  
+  <script>
+    document.getElementById("resForm").addEventListener("submit", (e) => {
+        const chosenDate = document.getElementById("resDate").value;
+        if (chosen < localToday()) {
+            e.preventDefault();
+            alert("Please select a valid date that is today or in the future.");
+        }
+    });
+  </script>
+
 </body>
 </html>
